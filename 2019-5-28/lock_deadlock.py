@@ -104,7 +104,7 @@ x_lock = threading.Lock()
 y_lock = threading.Lock()
 
 
-# Solve deadlock
+# 死锁问题解决
 
 
 # def thread_1():
