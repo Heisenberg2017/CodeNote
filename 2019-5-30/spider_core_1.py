@@ -21,7 +21,7 @@ def fetch_page(url_queue, html_queue, item_queue):
         item = url_queue.get()
         logging.info(f"{item} > fetch")
         time.sleep(1)
-        html_queue.put(f"html <{os.urandom(5).hex()}>")
+        html_queue.put(f"html <{bytes(os.urandom(5)).hex()}>")
 
 
 def parse_html(url_queue, html_queue, item_queue):
@@ -30,10 +30,10 @@ def parse_html(url_queue, html_queue, item_queue):
         logging.info(f"{html} > parse")
         time.sleep(0.5)
         for _ in range(3):
-            add_url(f"{html} > parse > {os.urandom(5).hex()}", url_queue,
+            add_url(f"{html} > parse > {bytes(os.urandom(5)).hex()}", url_queue,
                     html_queue, item_queue)
         for _ in range(10):
-            item_queue.put(f"item <{os.urandom(5).hex()}>")
+            item_queue.put(f"item <{bytes(os.urandom(5)).hex()}>")
 
 
 def save_data(url_queue, html_queue, item_queue):
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     html_queue = Queue(-1)
     item_queue = Queue(-1)
     url_template = "url {} "
-    url_queue.put(url_template.format(os.urandom(5).hex()))
+    url_queue.put(url_template.format(bytes(os.urandom(5)).hex()))
     with ThreadPoolExecutor(max_workers=3) as executor:
         executor.submit(fetch_page, url_queue, html_queue, item_queue)
         executor.submit(parse_html, url_queue, html_queue, item_queue)
