@@ -26,6 +26,9 @@ class FrenchDeck:
         '''
         return item in self._cards
 
+    def __repr__(self):
+        return 'FrenchDeck repr %r' % self._cards
+
     def shuffle(self):
         '''
         完全公平的洗牌算法
@@ -86,5 +89,30 @@ if __name__ == '__main__':
     '''
     for i in x -> for i in iter(x) -> for i in x.__iter__()
     '''
+
+    # __str__ 和 __repr__
+    '''
+    1.未实现__str__默认使用__repr__
+    2.__str__在print或者str时被调用, __repr__会在shell输出/日志时被调用
+    3.__repr__要求是无歧义 __str__要求是可读性强
+    '''
+    print(deck)
+    print(repr(deck))
+
+
+    '''
+    其他内置方法/运算符重载
+    __neg__ __pos__ __abs__ __bool__
+    反向运算符
+    a * b = b * a
+    中缀运算符
+    a *= b
+    '''
+
+    '''
+    为什么len不是普通方法
+    为了给解释器开后门调用内置的PyObjectVar的方法
+    '''
+
 
 
